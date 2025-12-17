@@ -21,15 +21,16 @@ st.markdown(
 )
 
 if st.button("Get Recommendation"):
-    career = predict_career(skills)
+   career = predict_career(skills, cgpa, year)
+
     
-    st.subheader("Recommended Career:")
-    st.success(career)
+   st.subheader("Recommended Career:")
+   st.success(career)
 
-    st.subheader("Suggested Internships:")
-    st.write(f"{career} Internship")
+   st.subheader("Suggested Internships:")
+   st.write(f"{career} Internship")
 
-    st.subheader("Skills to Learn Next:")
-    st.write("DSA, Git, Projects, Problem Solving")
+   st.subheader("Skills to Learn Next:")
+   st.write("DSA, Git, Projects, Problem Solving")
 st.markdown("---")
 st.markdown("Made with ❤️ by Shivani Chaudhary")

@@ -25,6 +25,15 @@ model = MultinomialNB()
 model.fit(X, careers)
 
 # Prediction function
-def predict_career(user_skills):
+def predict_career(user_skills, cgpa=None, year=None):
     user_vec = vectorizer.transform([user_skills])
-    return model.predict(user_vec)[0]
+    career = model.predict(user_vec)[0]
+
+    # Adjust for CGPA
+    if cgpa is not None:
+        if cgpa < 7:
+            career += " (Consider beginner-friendly internships)"
+        elif cgpa >= 8:
+            career += " (Aim for competitive internships)"
+    
+    return career
