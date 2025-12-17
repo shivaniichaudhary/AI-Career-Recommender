@@ -25,15 +25,30 @@ model = MultinomialNB()
 model.fit(X, careers)
 
 # Prediction function
-def predict_career(user_skills, cgpa=None, year=None):
-    user_vec = vectorizer.transform([user_skills])
-    career = model.predict(user_vec)[0]
+def predict_career(skills, cgpa=None, year=None):
+    skills = skills.lower()
 
-    # Adjust for CGPA
+    if "ml" in skills or "machine learning" in skills or "ai" in skills:
+        career = "Machine Learning Engineer"
+
+    elif "html" in skills or "css" in skills or "javascript" in skills:
+        career = "Web Developer"
+
+    elif "java" in skills or "c++" in skills or "dsa" in skills:
+        career = "Software Developer"
+
+    elif "sql" in skills or "excel" in skills or "data" in skills:
+        career = "Data Analyst"
+
+    else:
+        career = "Software Developer"
+
+    # CGPA-based suggestion
     if cgpa is not None:
-        if cgpa < 7:
-            career += " (Consider beginner-friendly internships)"
-        elif cgpa >= 8:
-            career += " (Aim for competitive internships)"
-    
+        if cgpa >= 8:
+            career += " (Eligible for top internships)"
+        elif cgpa < 7:
+            career += " (Start with beginner internships)"
+
     return career
+
